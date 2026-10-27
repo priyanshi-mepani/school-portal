@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portal</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f4f6f9;
+    }
+
+    /* NAVBAR */
+    nav {
+        background: #2c3e50;
+        padding: 15px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    nav h2 {
+        margin: 0;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    /* HERO SECTION */
+    .hero {
+        background: linear-gradient(to right, #2c3e50, #3498db);
+        color: white;
+        text-align: center;
+        padding: 100px 20px;
+    }
+
+    .hero h1 {
+        font-size: 42px;
+        margin-bottom: 15px;
+    }
+
+    .hero p {
+        font-size: 18px;
+        margin-bottom: 25px;
+    }
+
+    .btn {
+        padding: 12px 22px;
+        background: white;
+        color: #2c3e50;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #f1f1f1;
+    }
+
+    /* ABOUT SECTION */
+    .about {
+        padding: 60px 8%;
+        text-align: center;
+        background: white;
+    }
+
+    .about h2 {
+        margin-bottom: 20px;
+    }
+
+    .about p {
+        max-width: 700px;
+        margin: auto;
+        color: #555;
+    }
+
+    /* FEATURED COURSES */
+    .featured {
+        padding: 60px 8%;
+    }
+
+    .featured h2 {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .course-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+        transition: 0.3s;
+        cursor: pointer;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .course-card h3 {
+        margin-top: 0;
+    }
+
+    /* CALL TO ACTION */
+    .cta {
+        background: #3498db;
+        color: white;
+        text-align: center;
+        padding: 60px 20px;
+    }
+
+    .cta a {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 12px 22px;
+        background: white;
+        color: #3498db;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+    }
+
+    .cta a:hover {
+        background: #f1f1f1;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <h2>Student Portal</h2>
+    <div>
+        <a href="home.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="apply.html">How to Apply</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html" style="background: white; color: #2c3e50; padding: 5px 15px; border-radius: 5px; margin-left: 20px;">Login / Dashboard</a>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Welcome to Your Student Portal</h1>
+    <p>Access courses, track progress, and manage your academic journey.</p>
+
+</section>
+
+<!-- ABOUT -->
+<section class="about">
+    <h2>About Our Portal</h2>
+    <p>
+        This portal is designed to help students manage their courses, view assignments,
+        check grades, and stay updated with all academic resources in one place.
+        Efficient, interactive, and student-friendly.
+    </p>
+</section>
+
+<!-- FEATURED COURSES -->
+<section class="featured">
+    <h2>Featured Courses</h2>
+    <div class="course-grid">
+        <div class="course-card" onclick="openCourse('Web Development')">
+            <h3>Web Development</h3>
+            <p>Learn HTML, CSS, JavaScript and modern frameworks.</p>
+        </div>
+        <div class="course-card" onclick="openCourse('Python Programming')">
+            <h3>Python Programming</h3>
+            <p>Master Python programming for apps, web, and data science.</p>
+        </div>
+        <div class="course-card" onclick="openCourse('Data Science')">
+            <h3>Data Science</h3>
+            <p>Analyze data, build models, and gain insights.</p>
+        </div>
+    </div>
+</section>
+
+<!-- CALL TO ACTION -->
+<section class="cta">
+    <h2>Ready to Learn?</h2>
+    <p>Start exploring courses and enhance your skills today.</p>
+    <a href="courses.html">Browse Courses</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 Student Portal | All Rights Reserved
+</footer>
+
+<script>
+    function openCourse(courseName) {
+        alert('Opening course: ' + courseName);
+        // You can replace this with actual page navigation
+        // e.g., window.location.href = courseName.toLowerCase().replace(/\s/g,'') + ".html";
+    }
+</script>
+
+</body>
+</html>

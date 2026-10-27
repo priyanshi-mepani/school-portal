@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - School Portal</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
+background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+min-height:100vh;
+}
+
+/* NAVBAR */
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 8%;
+background:#2c3e50;
+}
+
+nav h2{
+color:white;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+font-size:14px;
+}
+
+nav a:hover{
+text-decoration:underline;
+}
+
+/* CENTER FORM */
+
+.page-wrapper{
+display:flex;
+justify-content:center;
+align-items:center;
+min-height:calc(100vh - 70px);
+}
+
+.login-container{
+background-color:white;
+padding:2.5rem;
+border-radius:12px;
+box-shadow:0 10px 40px rgba(0,0,0,0.2);
+width:380px;
+}
+
+.login-header{
+text-align:center;
+margin-bottom:2rem;
+}
+
+.login-header h2{
+color:#333;
+margin-bottom:0.5rem;
+}
+
+.form-group{
+margin-bottom:1.25rem;
+}
+
+label{
+display:block;
+margin-bottom:0.5rem;
+color:#555;
+font-weight:500;
+}
+
+select,input{
+width:100%;
+padding:12px 15px;
+border:2px solid #e1e5eb;
+border-radius:8px;
+font-size:14px;
+transition:border-color 0.3s;
+}
+
+select:focus,input:focus{
+outline:none;
+border-color:#667eea;
+}
+
+.btn-login{
+width:100%;
+padding:14px;
+background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+color:white;
+border:none;
+border-radius:8px;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+transition:transform 0.2s,box-shadow 0.2s;
+}
+
+.btn-login:hover{
+transform:translateY(-2px);
+box-shadow:0 5px 20px rgba(102,126,234,0.4);
+}
+
+.error-message{
+background-color:#fee2e2;
+color:#dc2626;
+padding:12px;
+border-radius:8px;
+margin-top:1rem;
+text-align:center;
+display:none;
+font-size:14px;
+}
+
+.success-message{
+background-color:#dcfce7;
+color:#16a34a;
+padding:12px;
+border-radius:8px;
+margin-top:1rem;
+text-align:center;
+display:none;
+font-size:14px;
+}
+
+.footer{
+margin-top:1.5rem;
+text-align:center;
+font-size:14px;
+color:#666;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- NAVIGATION BAR -->
+
+<nav>
+
+<h2>Student Portal</h2>
+
+<div>
+<a href="home.html">Home</a>
+<a href="courses.html">Courses</a>
+<a href="apply.html">How to Apply</a>
+<a href="contact.html">Contact Us</a>
+<a href="login.html">Login / Dashboard</a>
+</div>
+
+</nav>
+
+<div class="page-wrapper">
+
+<div class="login-container">
+
+<div class="login-header">
+<h2>Create Account</h2>
+<p>Register for the School Portal</p>
+</div>
+
+<form id="registerForm">
+
+<div class="form-group">
+<label for="role">Register As</label>
+<select id="role">
+<option value="student">Student</option>
+<option value="admin">Administrator</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="email">Email Address</label>
+<input type="email" id="email" placeholder="Enter your email" required>
+</div>
+
+<div class="form-group">
+<label for="password">Password</label>
+<input type="password" id="password" placeholder="Create a password" required>
+</div>
+
+<button type="submit" class="btn-login">Register</button>
+
+<div class="error-message" id="errorMessage"></div>
+<div class="success-message" id="successMessage"></div>
+
+</form>
+
+<div class="footer">
+<p>Already have an account? <a href="login.html">Login here</a></p>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+document.getElementById('registerForm').addEventListener('submit', async function(e){
+
+e.preventDefault();
+
+const role=document.getElementById('role').value;
+const email=document.getElementById('email').value;
+const password=document.getElementById('password').value;
+
+const errorMessage=document.getElementById('errorMessage');
+const successMessage=document.getElementById('successMessage');
+
+errorMessage.style.display='none';
+successMessage.style.display='none';
+
+try{
+
+const response=await fetch('register.php',{
+method:'POST',
+headers:{'Content-Type':'application/json'},
+body:JSON.stringify({role,email,password})
+});
+
+const data=await response.json();
+
+if(response.ok){
+
+successMessage.textContent='Account created! Redirecting to login...';
+successMessage.style.display='block';
+
+setTimeout(()=>{
+window.location.href='login.html';
+},2000);
+
+}else{
+
+errorMessage.textContent=data.error;
+errorMessage.style.display='block';
+
+}
+
+}catch(error){
+
+errorMessage.textContent='Cannot connect to server.';
+errorMessage.style.display='block';
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

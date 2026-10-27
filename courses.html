@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Courses | Student Portal</title>
+    <style>
+        body { margin: 0; font-family: 'Segoe UI', sans-serif; background-color: #f4f6f9; color: #333; }
+        
+        .hero {
+            background: linear-gradient(to right, #2c3e50, #3498db);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        nav { margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; }
+        .nav-links { margin-top: 15px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; font-size: 15px; }
+        .nav-links a:hover { text-decoration: underline; }
+
+        .courses-container {
+            padding: 40px 5%;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+
+        .course-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+            display: flex;
+            flex-direction: column;
+            transition: 0.3s;
+        }
+
+        .course-card:hover { transform: translateY(-5px); }
+        .course-card h3 { margin-top: 0; color: #2c3e50; }
+        
+        .meta-info { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
+
+        .units-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
+
+        .unit-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+        .unit-row:last-child { border-bottom: none; }
+        .unit-row span { font-size: 0.9rem; }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.2s;
+        }
+        .btn:hover { background-color: #2980b9; }
+
+        /* MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .close-btn { position: absolute; right: 20px; top: 15px; cursor: pointer; font-size: 24px; }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        #unitSummary {
+            font-size: 0.85rem;
+            color: #2c3e50;
+            background: #e1effe;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .status-msg { display: none; text-align: center; padding: 10px; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<section class="hero">
+    <nav>
+        <h2>Student Portal</h2>
+        <div class="nav-links">
+            <a href="home.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="apply.html">How to Apply</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="login.html" style="background: white; color: #2c3e50; padding: 5px 15px; border-radius: 5px; margin-left: 10px;">Login / Dashboard</a>
+        </div>
+    </nav>
+    <p>Upgrade your skills with our expert-led programs</p>
+</section>
+
+<section class="courses-container">
+
+    <div class="course-card" id="card-web">
+        <h3>Web Development</h3>
+        <p>Learn HTML, CSS, JavaScript and build real websites.</p>
+        <div class="meta-info">Duration: 8 Weeks | Level: Beginner</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: HTML5</span><input type="checkbox" value="HTML5"></div>
+            <div class="unit-row"><span>Unit 2: CSS3</span><input type="checkbox" value="CSS3"></div>
+            <div class="unit-row"><span>Unit 3: JavaScript</span><input type="checkbox" value="JavaScript"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Web Development', 'card-web')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-python">
+        <h3>Python Programming</h3>
+        <p>Master Python from basics to advanced concepts.</p>
+        <div class="meta-info">Duration: 10 Weeks | Level: Intermediate</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Python Basics</span><input type="checkbox" value="Python Basics"></div>
+            <div class="unit-row"><span>Unit 2: Data Structures</span><input type="checkbox" value="Data Structures"></div>
+            <div class="unit-row"><span>Unit 3: OOP in Python</span><input type="checkbox" value="OOP in Python"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Python Programming', 'card-python')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-ds">
+        <h3>Data Science</h3>
+        <p>Learn data analysis and machine learning basics.</p>
+        <div class="meta-info">Duration: 12 Weeks | Level: Intermediate</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Data Analysis</span><input type="checkbox" value="Data Analysis"></div>
+            <div class="unit-row"><span>Unit 2: Data Visualization</span><input type="checkbox" value="Data Visualization"></div>
+            <div class="unit-row"><span>Unit 3: Machine Learning</span><input type="checkbox" value="Machine Learning"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Data Science', 'card-ds')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-dm">
+        <h3>Digital Marketing</h3>
+        <p>Learn SEO and social media marketing strategies.</p>
+        <div class="meta-info">Duration: 6 Weeks | Level: Beginner</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: SEO</span><input type="checkbox" value="SEO"></div>
+            <div class="unit-row"><span>Unit 2: Social Media Marketing</span><input type="checkbox" value="Social Media Marketing"></div>
+            <div class="unit-row"><span>Unit 3: Online Advertising</span><input type="checkbox" value="Online Advertising"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Digital Marketing', 'card-dm')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-gd">
+        <h3>Graphic Design</h3>
+        <p>Create professional designs using creative tools.</p>
+        <div class="meta-info">Duration: 8 Weeks | Level: Beginner</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Photoshop</span><input type="checkbox" value="Photoshop"></div>
+            <div class="unit-row"><span>Unit 2: Illustrator</span><input type="checkbox" value="Illustrator"></div>
+            <div class="unit-row"><span>Unit 3: Branding Design</span><input type="checkbox" value="Branding Design"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Graphic Design', 'card-gd')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-mobile">
+        <h3>Mobile App Development</h3>
+        <p>Build Android and iOS applications.</p>
+        <div class="meta-info">Duration: 10 Weeks | Level: Intermediate</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Android Basics</span><input type="checkbox" value="Android Basics"></div>
+            <div class="unit-row"><span>Unit 2: App UI Design</span><input type="checkbox" value="App UI Design"></div>
+            <div class="unit-row"><span>Unit 3: App Deployment</span><input type="checkbox" value="App Deployment"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Mobile App Development', 'card-mobile')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-cyber">
+        <h3>Cyber Security</h3>
+        <p>Learn ethical hacking and system protection.</p>
+        <div class="meta-info">Duration: 12 Weeks | Level: Advanced</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Network Security</span><input type="checkbox" value="Network Security"></div>
+            <div class="unit-row"><span>Unit 2: Ethical Hacking</span><input type="checkbox" value="Ethical Hacking"></div>
+            <div class="unit-row"><span>Unit 3: System Protection</span><input type="checkbox" value="System Protection"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Cyber Security', 'card-cyber')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-ai">
+        <h3>Artificial Intelligence</h3>
+        <p>Understand AI concepts and build intelligent systems.</p>
+        <div class="meta-info">Duration: 14 Weeks | Level: Advanced</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: AI Fundamentals</span><input type="checkbox" value="AI Fundamentals"></div>
+            <div class="unit-row"><span>Unit 2: Neural Networks</span><input type="checkbox" value="Neural Networks"></div>
+            <div class="unit-row"><span>Unit 3: AI Applications</span><input type="checkbox" value="AI Applications"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Artificial Intelligence', 'card-ai')">Enroll Now</button>
+    </div>
+
+    <div class="course-card" id="card-biz">
+        <h3>Business Management</h3>
+        <p>Develop leadership and management skills.</p>
+        <div class="meta-info">Duration: 8 Weeks | Level: Beginner</div>
+        <div class="units-box">
+            <strong>Select Units:</strong>
+            <div class="unit-row"><span>Unit 1: Leadership</span><input type="checkbox" value="Leadership"></div>
+            <div class="unit-row"><span>Unit 2: Business Strategy</span><input type="checkbox" value="Business Strategy"></div>
+            <div class="unit-row"><span>Unit 3: Project Management</span><input type="checkbox" value="Project Management"></div>
+        </div>
+        <button class="btn" onclick="openEnrollment('Business Management', 'card-biz')">Enroll Now</button>
+    </div>
+
+</section>
+
+<div class="modal" id="enrollModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Confirm Enrollment</h3>
+        <form id="mainEnrollForm">
+            <input type="text" id="displayCourse" readonly style="background:#f0f0f0; border:none; font-weight:bold;">
+            <div id="unitSummary"></div>
+            
+            <input type="text" name="uName" placeholder="Full Name" required>
+            <input type="email" name="uEmail" placeholder="Email Address" required>
+            
+            <select name="uPayment" required>
+                <option value="">Payment Method</option>
+                <option>Credit Card</option>
+                <option>PayPal</option>
+                <option>Bank Transfer</option>
+            </select>
+
+            <button type="submit" class="btn" style="margin-top:20px;">Register Now</button>
+        </form>
+        <div id="statusBox" class="status-msg"></div>
+    </div>
+</div>
+
+<script>
+    const modal = document.getElementById("enrollModal");
+    const courseInput = document.getElementById("displayCourse");
+    const unitSummary = document.getElementById("unitSummary");
+    const enrollForm = document.getElementById("mainEnrollForm");
+    const statusBox = document.getElementById("statusBox");
+
+    let selectedUnits = [];
+
+    function openEnrollment(courseName, cardId) {
+        const card = document.getElementById(cardId);
+        const checks = card.querySelectorAll('input[type="checkbox"]:checked');
+        
+        if (checks.length === 0) {
+            alert("Please select at least one unit first!");
+            return;
+        }
+
+        selectedUnits = Array.from(checks).map(c => c.value);
+        courseInput.value = courseName;
+        unitSummary.innerHTML = "<strong>Units selected:</strong> " + selectedUnits.join(", ");
+        
+        modal.style.display = "flex";
+        statusBox.style.display = "none";
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+        enrollForm.reset();
+    }
+
+    enrollForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const fd = new FormData(enrollForm);
+        
+        const payload = {
+            course: courseInput.value,
+            units: selectedUnits,
+            name: fd.get('uName'),
+            email: fd.get('uEmail'),
+            payment: fd.get('uPayment')
+        };
+
+        try {
+            const resp = await fetch('enroll.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await resp.json();
+            statusBox.style.display = "block";
+            
+            if (resp.ok) {
+                statusBox.style.color = "green";
+                statusBox.innerText = "🎉 Success! Confirmation email sent.";
+                setTimeout(() => location.href = 'student_welcome.php', 2000);
+            } else {
+                statusBox.style.color = "red";
+                statusBox.innerText = result.error || "Enrollment failed.";
+            }
+        } catch (err) {
+            statusBox.style.display = "block";
+            statusBox.style.color = "red";
+            statusBox.innerText = "⚠️ Server Error.";
+        }
+    };
+
+    window.onclick = (e) => { if(e.target == modal) closeModal(); }
+</script>
+</body>
+</html>

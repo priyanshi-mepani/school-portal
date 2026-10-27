@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us - Student Portal</title>
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f4f6f9;
+    }
+
+    /* NAVBAR */
+    nav {
+        background: #2c3e50;
+        padding: 15px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    nav h2 {
+        margin: 0;
+    }
+
+    nav a {
+        color: white;
+        text-decoration: none;
+        margin-left: 20px;
+        font-size: 14px;
+    }
+
+    nav a:hover {
+        text-decoration: underline;
+    }
+
+    /* CONTACT SECTION */
+    .contact {
+        max-width: 600px;
+        margin: 80px auto;
+        background: white;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    }
+
+    .contact h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    label {
+        display: block;
+        margin-top: 15px;
+        font-weight: bold;
+    }
+
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        resize: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    #message {
+        margin-top: 15px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+        background: #2c3e50;
+        color: white;
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+    }
+
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+    <h2>Student Portal</h2>
+    <div>
+        <a href="home.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="apply.html">How to Apply</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="login.html" style="background: white; color: #2c3e50; padding: 5px 15px; border-radius: 5px; margin-left: 20px;">Login / Dashboard</a>
+    </div>
+</nav>
+
+<!-- CONTACT FORM -->
+<div class="contact">
+    <h2>Contact Us</h2>
+    <form id="contactForm">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" required>
+
+        <label for="messageBox">Message</label>
+        <textarea id="messageBox" rows="6" required></textarea>
+
+        <button type="submit">Send Message</button>
+        <p id="message"></p>
+    </form>
+</div>
+
+<footer>
+    © 2026 Student Portal | All Rights Reserved
+</footer>
+
+<script>
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const messageBox = document.getElementById('messageBox').value;
+
+        if(name && email && subject && messageBox){
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerText = 'Thank you, your message has been sent!';
+            // Clear form
+            this.reset();
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerText = 'Please fill in all fields.';
+        }
+    });
+</script>
+
+</body>
+</html>
